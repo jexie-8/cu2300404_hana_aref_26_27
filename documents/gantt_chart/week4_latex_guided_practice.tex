@@ -1,0 +1,176 @@
+\begin{filecontents*}{\jobname.bib}
+@article{huyen2024ai,
+  author  = {Huyen, Chip},
+  title   = {AI Engineering: Building Applications with Foundation Models},
+  journal = {O'Reilly Media},
+  year    = {2024}
+}
+
+@article{kottwitz2021latex,
+  author  = {Kottwitz, Stefan},
+  title   = {LaTeX Beginner's Guide: Create High-Quality Books, Articles, and Presentations},
+  journal = {Packt Publishing},
+  year    = {2021}
+}
+\end{filecontents*}
+
+\documentclass[12pt,a4paper]{article}
+
+% ---------- Packages ----------
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[margin=2.54cm]{geometry}
+\usepackage{booktabs,tabularx}
+\usepackage{pgfgantt}
+\usepackage[dvipsnames,table]{xcolor}
+\usepackage[hidelinks]{hyperref}
+
+% =========================================================================
+% [TODO - TASK 1]: MACRO & METADATA CONFIGURATION
+% Architectural Why: Hardcoding metadata across multiple chapters, headers,
+% or declarations violates DRY principles and causes drift. Preamble macros
+% act as a single source of truth for your dissertation metadata.
+% Action: Replace the placeholders below with your actual project details.
+% =========================================================================
+\newcommand{\studentname}{[TODO: Enter Your Full Name]}
+\newcommand{\studentid}{[TODO: Enter Coventry/TKH Student ID]}
+\newcommand{\projecttitle}{[TODO: Enter Working FYP Project Title]}
+\newcommand{\modulecode}{KH6002CMD}
+\newcommand{\moduletitle}{Project Discovery}
+
+% Document Header Styling
+\title{\vspace{-1.5cm}\textbf{\large \modulecode: \moduletitle}\\[0.3cm]
+\Large \textbf{\projecttitle}\\[0.2cm]
+\normalsize Guided Practice Sandbox: LaTeX, BibTeX \& Project Planning}
+\author{\textbf{\studentname} \quad (ID: \studentid)}
+\date{\today}
+
+\begin{document}
+\maketitle
+\thispagestyle{empty}
+
+\noindent\rule{\textwidth}{0.8pt}
+\vspace{-0.3cm}
+
+% =========================================================================
+% SECTION 1: CITATION PIPELINE & THE [?] TRAP
+% =========================================================================
+\section{Academic Engine \& Citation Pipeline}
+
+Academic writing requires verifiable claims backed by peer-reviewed literature. LaTeX isolates bibliographic metadata in \texttt{.bib} databases and relies on a multi-pass compilation sequence (\texttt{pdflatex} $\rightarrow$ \texttt{bibtex} $\rightarrow$ \texttt{pdflatex} $\rightarrow$ \texttt{pdflatex}) to build numerical citations.
+
+% =========================================================================
+% [TODO - TASK 2]: THE [?] UNDEFINED CITATION TRAP
+% Architectural Why: pdflatex does not parse .bib files directly; it logs
+% citation requests into \jobname.aux. If a citation key is misspelled or
+% not yet indexed by bibtex, pdflatex inserts a bold '[?]' into the PDF.
+% Action:
+% 1. Notice the two citations below: 'huyen2099_wrong_key' and 'TODO_ADD_SECOND_KEY'.
+% 2. Inspect the embedded .bib database at the very top of this file to find the valid keys.
+% 3. Correct the keys to match: huyen2024ai and kottwitz2021latex.
+% 4. Run BibTeX (F8 in TeXstudio), followed by pdfLaTeX (F5) to resolve references.
+% =========================================================================
+Foundation model architectures and automated software agents require structured evaluation benchmarks \cite{huyen2099_wrong_key}. Concurrently, reproducible research documentation demands strict separation of content from typography through compiled markup systems \cite{TODO_ADD_SECOND_KEY}.
+
+% =========================================================================
+% SECTION 2: WORK BREAKDOWN STRUCTURE (WBS)
+% =========================================================================
+\section{Work Package Breakdown}
+
+Project deliverables must be decomposed into explicit Work Packages (WPs). In Table~\ref{tab:wrong_label}, we summarize the primary delivery stages.
+
+% =========================================================================
+% [TODO - TASK 3]: BROKEN BOOKTABS TABLE & CROSS-REFERENCE
+% Architectural Why: Academic tables avoid vertical rules and utilize booktabs
+% horizontal rules for visual hierarchy. In tabularx, every row must contain
+% exactly (N - 1) ampersands '&' for N columns, or the parser fails with
+% an 'Extra alignment tab' or syntax error. Also, cross-references must point
+% to an existing \label{} to resolve cleanly.
+% Action:
+% 1. Fix the missing column delimiter '&' in the WP2 row below.
+% 2. Uncomment the \bottomrule command at the end of the tabular environment.
+% 3. Fix the label/ref mismatch: Change '\ref{tab:wrong_label}' in the
+%    text above to match the table's label '\label{tab:wp}'.
+% =========================================================================
+\begin{table}[htbp]
+\centering\small
+\renewcommand{\arraystretch}{1.3}
+\begin{tabularx}{\textwidth}{l l X l l}
+\toprule
+\textbf{WP} & \textbf{Work Package} & \textbf{Main Tasks} & \textbf{Output} & \textbf{Weeks} \\
+\midrule
+WP1 & Research \& Ethics     & Literature review; formal ethics application & Approved Ethics & 1--4 \\
+% ERROR BELOW: Notice the missing '&' between 'Requirements; system design' and 'Architecture Doc'
+WP2 & Requirements & Requirements; system design Architecture Doc & 5--8 \\
+WP3 & Core Implementation   & Artefact sprints; GitHub commits             & Working Artefact & 9--16 \\
+% [TODO]: Uncomment the bottomrule line below to close the table properly
+% \bottomrule
+\end{tabularx}
+\caption{Initial Work Package plan for Final Year Project}
+\label{tab:wp}
+\end{table}
+
+% =========================================================================
+% SECTION 3: 24-WEEK GANTT ROADMAP
+% =========================================================================
+\section{Project Timeline Schedule}
+
+Visual scheduling in LaTeX is executed natively using the \texttt{pgfgantt} package, producing vector graphics that preserve typography and line weight without rasterization blur.
+
+% =========================================================================
+% [TODO - TASK 4]: INCOMPLETE PGFGANTT 24-WEEK SCHEDULE
+% Architectural Why: pgfgantt renders tasks via coordinate units (weeks 1 to 24).
+% \ganttgroup defines parent deliverables, \ganttbar defines task durations,
+% and \ganttmilestone marks critical gating events (zero-duration checkpoints).
+% Action:
+% Complete WP2 (Weeks 5 to 8) and WP3 (Weeks 9 to 16) by uncommenting and
+% completing the coordinate blocks below.
+% =========================================================================
+\begin{figure}[htbp]
+\centering
+\begin{ganttchart}[
+    hgrid, vgrid,
+    x unit=0.48cm,
+    y unit chart=0.6cm,
+    title label font=\tiny\bfseries,
+    bar label font=\scriptsize,
+    group label font=\scriptsize\bfseries,
+    milestone label font=\scriptsize\itshape,
+    bar/.append style={fill=NavyBlue!70},
+    group/.append style={fill=Mahogany!80},
+    milestone/.append style={fill=Goldenrod!90}
+  ]{1}{24}
+  \gantttitle{24-Week Final Year Project Timeline}{24} \\
+  \gantttitlelist{1,...,24}{1} \\
+
+  % --- Work Package 1 (Completed Reference) ---
+  \ganttgroup{WP1: Research \& Ethics}{1}{4} \\
+  \ganttbar{Literature Review}{1}{3} \\
+  \ganttbar{Ethics Submission}{2}{4} \\
+  \ganttmilestone{Ethics Approval Gate}{4} \\
+
+  % --- Work Package 2: Requirements & Design (Weeks 5-8) ---
+  % [TODO - TASK 4.1]: Uncomment and verify the coordinates for WP2
+  % \ganttgroup{WP2: Requirements \& Design}{5}{8} \\
+  % \ganttbar{System Specification}{5}{6} \\
+  % \ganttbar{Architecture Modeling}{7}{8} \\
+  % \ganttmilestone{Design Baseline}{8} \\
+
+  % --- Work Package 3: Implementation (Weeks 9-16) ---
+  % [TODO - TASK 4.2]: Complete WP3 implementation bar spanning Weeks 9 to 16
+  % \ganttgroup{WP3: Core Implementation}{9}{16} \\
+  % \ganttbar{Sprint 1--4 Development}{9}{16} \\
+  % \ganttmilestone{Mid-Point Prototype}{12}
+
+\end{ganttchart}
+\caption{24-Week Project Roadmap with Gantt visualization}
+\label{fig:gantt_sandbox}
+\end{figure}
+
+% =========================================================================
+% REFERENCES (IEEE Numeric Style)
+% =========================================================================
+\bibliographystyle{ieeetr}
+\bibliography{\jobname}
+
+\end{document}
